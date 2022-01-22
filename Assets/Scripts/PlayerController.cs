@@ -16,13 +16,7 @@ public class PlayerController : MonoBehaviour
   {
     Debug.Log("Player controller awake");  
   }
-  //  void Start()
-  //  {
-  //      if (mainCamera)
-  //       {
-  //           cameraPos = mainCamera.transform.position;
-  //       }
-  //  }
+  
   
   private void Update()
   {
@@ -32,7 +26,7 @@ public class PlayerController : MonoBehaviour
     {
       speed = 0;
     }
-    // rb2D.velocity = new Vector2(speed * moveSpeed,rb2D.velocity.y);
+    
     transform.localPosition += Vector3.right * speed * moveSpeed * Time.deltaTime;
     
     if(speed < 0)
@@ -43,11 +37,8 @@ public class PlayerController : MonoBehaviour
     {
       transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);
     }
-    // //Camera
-    //  if (mainCamera)
-    //     {
-    //         mainCamera.transform.position = new Vector3(transform.position.x, cameraPos.y, cameraPos.z);
-    //     }
+   
+   
   
     // Jump
     if(Input.GetKeyDown(KeyCode.W) && isGrounded)
@@ -67,7 +58,18 @@ public class PlayerController : MonoBehaviour
       isCrouching = false;
     }
     
+    
   }
+  // //Key
+  //    void OnTriggerEnter2D(Collider2D other )
+  //   {
+  //     if(other.gameObject.CompareTag ("Keys"))
+  //     {
+  //       Destroy(other.gameObject);
+  //     }
+  //   }
+    
+
  
   void OnCollisionStay2D(Collision2D other) 
   {
@@ -93,6 +95,7 @@ public class PlayerController : MonoBehaviour
       isGrounded = false;
       
     }
+    
     
   }
   
