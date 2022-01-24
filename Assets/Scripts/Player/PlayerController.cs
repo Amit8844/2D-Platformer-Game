@@ -60,14 +60,7 @@ public class PlayerController : MonoBehaviour
     
     
   }
-  // //Key
-  //    void OnTriggerEnter2D(Collider2D other )
-  //   {
-  //     if(other.gameObject.CompareTag ("Keys"))
-  //     {
-  //       Destroy(other.gameObject);
-  //     }
-  //   }
+  
     
 
  
