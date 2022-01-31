@@ -13,9 +13,14 @@ public class PlayerController : MonoBehaviour
   public bool isCrouching;
   public Collider2D groundCheck;
   private PlayerHealth health;
- 
+
+  [SerializeField]private AudioSource jumpSoundEffect;
+  [SerializeField]private AudioSource StartSoundEffect;
+  
+  
   private void Awake() 
   {
+   StartSoundEffect.Play();
     Debug.Log("Player controller awake");  
     health = GetComponent<PlayerHealth>();
   }
@@ -38,7 +43,9 @@ public class PlayerController : MonoBehaviour
   private void Update()
   {
     float speed = Input.GetAxisRaw("Horizontal");
+   
     animator.SetFloat("Speed", Mathf.Abs(speed));
+
     if(isCrouching == true)
     {
       speed = 0;
@@ -68,6 +75,7 @@ public class PlayerController : MonoBehaviour
     if(Input.GetKeyDown(KeyCode.W) && isGrounded)
     {
       animator.SetTrigger("Jump");
+      jumpSoundEffect.Play();
       rb2D.velocity = new Vector2(rb2D.velocity.x, jumpSpeed);
     }
     // Crouch
@@ -96,8 +104,9 @@ public class PlayerController : MonoBehaviour
       {
         return;
       }
-
+     
       isGrounded = true;
+      
     }
   }
   void OnCollisionExit2D(Collision2D other) 
