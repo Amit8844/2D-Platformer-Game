@@ -7,7 +7,9 @@ public class PlatformPatrol : MonoBehaviour
    public float raylenght;
     public float moveSpeed;
     private bool moveRight;
-    
+    [SerializeField] private float attackDamage = 10f;
+    [SerializeField] private float attackSpeed = 1f;
+    private float canAttack;
 
     public Transform contactChecker;
     // Start is called before the first frame update
@@ -21,6 +23,35 @@ public class PlatformPatrol : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+
+        if(PlayerHealth.gameOver)
+        {
+            //animator.enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+            this.enabled = false;
+        }
+
+        canAttack += Time.deltaTime; 
+           
+
+        
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            if (attackSpeed<= canAttack)
+            {
+                 other.gameObject.GetComponent<PlayerController>().PlayerDamaged(attackDamage);
+                 canAttack = 0f;
+                
+            }
+            // else
+            // {
+            //     canAttack += Time.deltaTime;
+            // }
+            
+        }
     }
 
     private  void FixedUpdate()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
  
 public class PlayerController : MonoBehaviour
 {
@@ -11,12 +12,28 @@ public class PlayerController : MonoBehaviour
   public bool isGrounded;
   public bool isCrouching;
   public Collider2D groundCheck;
+  private PlayerHealth health;
  
   private void Awake() 
   {
     Debug.Log("Player controller awake");  
+    health = GetComponent<PlayerHealth>();
   }
-  
+  public void PlayerDamaged (float enemyDamage) 
+  {
+    health.UpdateHealth(-enemyDamage);
+     
+    if(PlayerHealth.gameOver)
+    {
+       //animator.SetTrigger("Death");
+      SceneManager.LoadScene("GameOver");
+      return;
+      
+    }
+    rb2D.velocity += Vector2.up * 6;
+    animator.SetTrigger("Hurting");
+  }
+
   
   private void Update()
   {
@@ -37,6 +54,13 @@ public class PlayerController : MonoBehaviour
     {
       transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);
     }
+    if(PlayerHealth.gameOver)
+    {
+      animator.SetTrigger("death");
+      //SceneManager.LoadScene("GameOver");
+      //this.enabled = false;
+    }
+    
    
    
   

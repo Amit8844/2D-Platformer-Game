@@ -10,7 +10,7 @@ public class FallDeath : MonoBehaviour
         if(collision.gameObject.GetComponent<PlayerController> () != null)
         {
             Debug.Log("YOu DIED");
-            SceneManager.LoadScene(NextScene);
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
