@@ -7,6 +7,8 @@ public class ScoreScript : MonoBehaviour
 {
     public Text MyscoreText;
     private int ScoreNum;
+
+    [SerializeField]private AudioSource KeyCollectSoundEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class ScoreScript : MonoBehaviour
        {
            ScoreNum += 1;
            Destroy(Key.gameObject);
+           KeyCollectSoundEffect.Play();
            MyscoreText.text = "Score : " + ScoreNum;
        }
    } 

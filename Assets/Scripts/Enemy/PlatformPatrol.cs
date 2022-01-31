@@ -10,6 +10,8 @@ public class PlatformPatrol : MonoBehaviour
     [SerializeField] private float attackDamage = 10f;
     [SerializeField] private float attackSpeed = 1f;
     private float canAttack;
+      [SerializeField]private AudioSource EnenmyAttackSound;
+      
 
     public Transform contactChecker;
     // Start is called before the first frame update
@@ -43,6 +45,7 @@ public class PlatformPatrol : MonoBehaviour
             if (attackSpeed<= canAttack)
             {
                  other.gameObject.GetComponent<PlayerController>().PlayerDamaged(attackDamage);
+                 EnenmyAttackSound.Play();
                  canAttack = 0f;
                 
             }
@@ -67,12 +70,15 @@ public class PlatformPatrol : MonoBehaviour
             if(moveRight == true)
             {
                 transform.eulerAngles = new Vector2(0, -180);
+                
                 moveRight = false;
             }
             else
             {
+                
                 transform.eulerAngles = new Vector2(0, 0);
                 moveRight = true;
+
             }
         }
     }
