@@ -8,7 +8,7 @@ public class EndMenue : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Start Screen");
        
     }
 }

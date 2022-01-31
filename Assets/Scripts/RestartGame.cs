@@ -8,6 +8,6 @@ public class RestartGame : MonoBehaviour
     
     public void RestartLevel()
         {
-             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+             SceneManager.LoadScene("MainScene");
         }
 }
